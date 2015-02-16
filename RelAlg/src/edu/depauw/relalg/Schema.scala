@@ -17,6 +17,11 @@ trait Schema {
   def indices(cols: Iterable[String]): Iterable[Int]
 }
 
+object Schema {
+  def apply(fields: (String, Type)*): Schema =
+    new DefaultSchema(fields.toIndexedSeq map {case (name, _) => name}, fields.toIndexedSeq map {case (_, typ) => typ})
+}
+
 class DefaultSchema(val names: IndexedSeq[String], val types: IndexedSeq[Type]) extends Schema {
   def rename(from: String, to: String): Schema =
     new DefaultSchema(names map {name => if (name == from) to else name}, types)

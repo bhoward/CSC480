@@ -6,7 +6,8 @@ object Test {
     val t = Table(s).insert(
           Row("Harv", 987654321),
           Row("Ralph", 555555555),
-          Row("Fred", 123456789)
+          Row("Fred", 123456789),
+          Row("Phred", 123456789)
         )
         
     println((t product t.rename("ssn", "ssn2").rename("name", "name2"))
@@ -50,7 +51,8 @@ object Test {
           "minssn" -> MinAggregation("ssn"),
           "avgssn" -> AvgAggregation("ssn"),
           "maxname" -> MaxAggregation("name"),
-          "num" -> CountAggregation
+          "num" -> CountAggregation("ssn"),
+          "unum" -> CountDistinctAggregation("ssn")
           ))
     println()
           
